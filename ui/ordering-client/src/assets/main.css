@@ -1,0 +1,29 @@
+
+.app-fake-logo {
+  font-size: 2rem;
+}
+
+h1 {
+  font-size: 1.75rem;
+}
+
+h2.card-name, h2.cart-header {
+  font-size: 1.25rem;
+}
+
+.restaurant-image {
+  width: 60%;
+  display: block;
+  margin: auto;
+  padding-bottom: .5rem;
+  padding-top: .5rem;
+}
+
+
+.fake-meal-image {
+  font-size: 2rem;
+}
+
+a {
+  color: darkblue;
+}
