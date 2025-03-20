@@ -3,9 +3,6 @@
 class StatusChangeRules
   Rule = Struct.new(:status, :requestable_by_user_classes, :allowed_next_statuses)
 
-  # TODO - hmm. not able to have a user go from places to processing. wtf..
-
-
   # small number of statuses, so lookup in array should be performant enough
   # nil requestable_by_user_classes means no restriction - though this is only currently applicable for default state
   @@rules = [

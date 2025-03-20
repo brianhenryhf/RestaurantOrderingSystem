@@ -1,5 +1,5 @@
 # TODO NOTE: either an order has to only be saved when 'placed', or we need an 'incomplete' status, else
-# some looser nullability check on status name here. an order with no status doesn't make sense. and a peristed order status
+# some looser nullability check on status name here. an order with no status doesn't make sense. and a persisted order status
 # entry with no status is definitely meaningless.
 # for now, saving an order with no status implies incomplete. not ideal, but time is a factor...
 
@@ -14,7 +14,7 @@ class OrderStatus < ApplicationRecord
 
   scope :order_by_desc_recency, -> { order(updated_at: :desc) }
 
-  #skippping enunm use for now - the generateed methods wil have no user-specific behavrios built in and its just mysterious and new
+  #skipping enum use for now - the generateed methods wil have no user-specific behavrios built in and its just mysterious and new
   # https://api.rubyonrails.org/v5.2.4.1/classes/ActiveRecord/Enum.html . int ordinals.
 
   def valid_for_user?(user)
