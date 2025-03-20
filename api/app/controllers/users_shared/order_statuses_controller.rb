@@ -3,7 +3,7 @@ module UsersShared
     before_action :set_order
 
     def index
-      @order_statuses = OrderStatus.accessible_by(current_ability).order_by_desc_recency
+      @order_statuses = OrderStatus.accessible_by(current_ability).where(order: @order).order_by_desc_recency
     end
 
     def create
