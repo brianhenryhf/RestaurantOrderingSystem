@@ -26,7 +26,7 @@ class OrderStatus < ApplicationRecord
   end
 
   def allowed_status_transition
-    prev_status = order.order_statuses.order_by_desc_recency.last&.status
+    prev_status = order.order_statuses.order_by_desc_recency.first&.status
 
     unless StatusChangeRules.new.allowed_next_for_current_status?(prev_status, status)
       errors.add(:status, "#{status} is not an allowed next status")
