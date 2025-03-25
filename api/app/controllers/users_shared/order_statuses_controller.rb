@@ -17,6 +17,17 @@ module UsersShared
       end
     end
 
+    def available
+      @last_order_status = @order.order_statuses.order_by_desc_recency.first
+      # TODO revisit auth?
+      authorize! :create, @last_order_status
+
+      @order_statuses = @last_order_status.available_statuses(current_user)
+      puts "in ctorlr: #{@order_statuses}, user: #{current_user}"
+
+      render json: @order_statuses, status: :ok
+    end
+
 
     private
       def set_order

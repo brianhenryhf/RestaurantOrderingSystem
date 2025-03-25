@@ -40,7 +40,7 @@ class StatusChangeRules
   def allowed_next_statuses_for_user_class(current_status, user_class)
     current_status_rule = rule_for(current_status)
     all_allowed = current_status_rule.allowed_next_statuses
-    all_allowed.filter { |status| self.class.allowed_next_for_user_class?(status, user_class) }
+    all_allowed.filter { |status| allowed_next_for_user?(status, user_class) }
   end
 
   private

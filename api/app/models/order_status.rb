@@ -10,7 +10,7 @@ class OrderStatus < ApplicationRecord
   belongs_to :order
   validates :status, presence: true
   validates :status, allow_blank: true, inclusion: { in: StatusChangeRules.valid_statuses, message: "%{value} is not a valid status" }
-  validate :allowed_status_transition
+  validate :allowed_status_transition?
 
   scope :order_by_desc_recency, -> { order(updated_at: :desc) }
 
@@ -25,11 +25,15 @@ class OrderStatus < ApplicationRecord
     true
   end
 
-  def allowed_status_transition
+  def allowed_status_transition?
     prev_status = order.order_statuses.order_by_desc_recency.first&.status
 
     unless StatusChangeRules.new.allowed_next_for_current_status?(prev_status, status)
       errors.add(:status, "#{status} is not an allowed next status")
     end
+  end
+
+  def available_statuses(user)
+    StatusChangeRules.new.allowed_next_statuses_for_user_class(status, user)
   end
 end

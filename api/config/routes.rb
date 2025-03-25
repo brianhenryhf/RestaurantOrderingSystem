@@ -10,7 +10,9 @@ Rails.application.routes.draw do
     # user id is implicitly present from auth jwt, so namespace instead of resource, which would accept/require it in path
     namespace :customers do
       resources :orders, only: [:index, :show, :create, :update] do
-        resources :order_statuses, only: [:index, :create], controller: '/users_shared/order_statuses'
+        resources :order_statuses, only: [:index, :create, :available], controller: '/users_shared/order_statuses' do
+          get 'available', on: :collection
+        end
       end
     end
 
@@ -20,7 +22,7 @@ Rails.application.routes.draw do
       resources :restaurants, only: [:index, :show, :update] do
         resources :meals, only: [:index, :show, :create, :update]
         resources :orders, only: [:index, :show] do
-          resources :order_statuses, only: [:index, :create], controller: '/users_shared/order_statuses'
+          resources :order_statuses, only: [:index, :create, :available], controller: '/users_shared/order_statuses'
         end
       end
     end
